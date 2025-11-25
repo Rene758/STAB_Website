@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de" data-theme="light">
     <head>
         <script>
             // Erkennung von Mobilgeräten per User-Agent
@@ -1110,13 +1110,6 @@
                         </svg>
                     `;
                     
-                    setTimeout(() => {
-                        submitBtn.innerHTML = `
-                            Nachricht gesendet! ✓
-                        `;
-                        submitBtn.classList.remove('btn-primary');
-                        submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-                    }, 2000);
                 });
             }
         });
@@ -1141,8 +1134,8 @@
             maxZoom: 19
         }).addTo(map);
 
-        L.marker([47.069560, 15.450518]).addTo(map).bindPopup("HTL Ortwein");
-        L.marker([47.091662, 15.423002]).addTo(map).bindPopup("TU Graz");
+        L.marker([47.069560, 15.450518]).addTo(map).bindPopup("TU Graz");
+        L.marker([47.091662, 15.423002]).addTo(map).bindPopup("HTL Ortwein");
 
         // Mobile menu functionality
         const mobileMenuButton = document.getElementById('mobile-menu-button');
