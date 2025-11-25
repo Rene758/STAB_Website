@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="light">
+<html lang="de" data-theme="dark">
     <head>
         <script>
             // Erkennung von Mobilgeräten per User-Agent
@@ -57,7 +57,7 @@
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-primary);
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background-color: var(--secondary-color_trans);
             transition: all 0.3s ease;
         }
         
@@ -295,7 +295,7 @@
             overflow: hidden; 
             
             /* Fügt Transition für den JS-Parallax-Effekt hinzu, damit die Bewegung weich ist */
-            transition: transform 0.2s ease-out; 
+            transition: transform 0.1s ease-out; 
             
             /* --- CSS GRID FÜR 3x3 LAYOUT --- */
             display: grid;
@@ -312,9 +312,9 @@
             width: 100%;
             height: 100%;
             /* NEU: Z-INDEX 100, um ÜBER den Bildern zu liegen */
-            z-index: 100; 
+            z-index: 2; 
             pointer-events: none; 
-            background-color: rgba(255, 255, 255, 0.6); /* Light Mode Standard */
+            background-color: rgba(255, 255, 255, 0.7); /* Light Mode Standard */
             transition: background-color 0.3s ease; 
             /* Wichtig: Muss das gesamte Grid überdecken, daher außerhalb des Grid-Flusses */
             grid-column: 1 / -1; 
@@ -323,7 +323,7 @@
 
         /* 4. Anpassungen für den Dark Mode Overlay */
         [data-theme="dark"] .background-container::before {
-            background-color: rgba(0, 0, 0, 0.6); 
+            background-color: rgba(0, 0, 0, 0.7); 
         }
 
         /* 5. Die BILDER SELBST (Wichtig für Unverzerrtheit!) */
@@ -1196,6 +1196,11 @@
             const lightModeImagesPool = [
                 '/bg_pictures/light_mode/Bild_1.png',
                 '/bg_pictures/light_mode/Bild_2.png',
+                '/bg_pictures/light_mode/Bild_3.png',
+                '/bg_pictures/light_mode/Bild_4.png',
+                '/bg_pictures/light_mode/Bild_5.png',
+                '/bg_pictures/light_mode/Bild_6.png',
+                '/bg_pictures/light_mode/Bild_7.png',
                 // Füge hier weitere Bilder hinzu...
             ];
 
@@ -1203,6 +1208,11 @@
                 // Diese Bilder MÜSSEN den Light Mode Bildern positionsweise entsprechen!
                 '/bg_pictures/dark_mode/Bild_1.png',
                 '/bg_pictures/dark_mode/Bild_2.png',
+                '/bg_pictures/dark_mode/Bild_3.png',
+                '/bg_pictures/dark_mode/Bild_4.png',
+                '/bg_pictures/dark_mode/Bild_5.png',
+                '/bg_pictures/dark_mode/Bild_6.png',
+                '/bg_pictures/dark_mode/Bild_7.png',
             ];
 
                     // DEFINIERE DEN PFAD FÜR DEN LEEREN PLATZHALTER (optional, nur als Flag nötig)
