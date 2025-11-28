@@ -22,41 +22,69 @@
     
     <style>
         :root {
-            --primary-color: #00ff00;
             --secondary-color_trans: #f0f0f0bd;
             --accent-color: #26304e;
             --accent-light: #a8c0e9;
             --text-primary: #1a1f2e;
-            --text-secondary: #00ff00;
-            --text-gold: #c7a76b;
+            --text-secondary: #394466;
             --green-background: #eef0f4;
             --marked-text: #2b58a4;
-            --bg-light: #00ff00;
             --bg-card: #eef0f4;
             --border-light: #a8c0e9;
             --bg-gradient-start: #eef0f4;
             --bg-gradient-end: #a7abb7;
             --color-schnelle-antwort: #446566;
+            --hover-color: #a8c0e9;
+            --price-hover: #5c78a7;
+            --background-leistung: #eef0f4;
+            --text-about-me: #394466;
         }
         
         [data-theme="dark"] {
-            --primary-color: #00ff00;
             --secondary-color_trans: #2d3748bb;
             --accent-color: #5c78a7;
             --accent-light: #1a1f2e;
             --text-primary: #eaf1ff;
-            --text-secondary: rgb(197, 204, 222);
-            --text-gold: #c7a76b;
+            --text-secondary: #a9aeb9;
             --green-background: #1a1f2e;
             --marked-text: #a8c0e9;
-            --bg-light: #00ff00;
             --bg-card: #333e52;
             --border-light: #4a5568;
             --bg-gradient-start: #1a202c;
             --bg-gradient-end: #2d3748;
             --color-schnelle-antwort: #dcefed;
+            --hover-color: #a8c0e9;
+            --price-hover: #769bdb;
+            --background-leistung: #1a202c;
+            --text-about-me: #c7cddb;
         }
-        
+
+        .toggle-button {
+            transition: color 0.3s ease; 
+        }
+
+        .toggle-button:hover {
+            color: var(--hover-color); 
+        }
+
+        [data-theme="dark"] .toggle-button:hover {
+            color: var(--hover-color) !important;
+        }
+
+        .item-description {
+            max-height: 0;
+            overflow: hidden;
+            
+            transition: max-height 0.7s; 
+            
+            transform: translateZ(0); 
+        }
+
+        .item-description.open {
+            max-height: 90px; 
+            margin-bottom: 8px; 
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-primary);
@@ -99,26 +127,37 @@
         }
         
         .nav-link {
+            color: var(--text-secondary);
             position: relative;
             transition: color 0.3s ease;
         }
-        
+
         .nav-link:hover {
-            color: var(--accent-color);
+            color: var(--hover-color);
         }
-        
+
+        [data-theme="dark"] .nav-link:hover {
+            color: var(--hover-color) !important;
+        }
+
         .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
-            bottom: -4px;
+            height: 5px; 
+            bottom: -2px;
             left: 50%;
-            background: var(--accent-color);
+            background:
+                linear-gradient(var(--accent-color), var(--accent-color)) top / 100% 2px no-repeat,
+                repeating-linear-gradient(
+                    to right,
+                    var(--accent-color) 0 7px,
+                    transparent 6px 12px
+                ) bottom / 100% 2px no-repeat;
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
@@ -133,9 +172,15 @@
             border: none;
             cursor: pointer;
         }
+
+        .btn-primary.sent-success:hover {
+            transform: translateY(0px) !important;
+            box-shadow: none !important;
+            cursor: default !important;
+        }
         
         .btn-primary:hover {
-            background: #5c78a7;
+            background: var(--price-hover);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(49, 130, 206, 0.3);
         }
@@ -767,11 +812,11 @@
             <!-- Desktop Navigation -->
             <div class=" md:flex items-center space-x-4">
                 <div class="hidden md:flex items-baseline space-x-8">
-                    <a href="#leistungen" class="nav-link text-gray-700 hover:text-blue-400 px-3 py-2 text-sm font-medium">Themengebiete</a>
-                    <a href="#pricing" class="nav-link text-gray-700 hover:text-blue-400 px-3 py-2 text-sm font-medium">Preise</a>
-                    <a href="#location" class="nav-link text-gray-700 hover:text-blue-400 px-3 py-2 text-sm font-medium">Standorte</a>
-                    <a href="#about" class="nav-link text-gray-700 hover:text-blue-400 px-3 py-2 text-sm font-medium">Über mich</a>
-                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-400 px-3 py-2 text-sm font-medium">Kontakt</a>
+                    <a href="#leistungen" class="nav-link px-3 py-2 text-sm font-medium">Themengebiete</a>
+                    <a href="#pricing" class="nav-link px-3 py-2 text-sm font-medium">Preise</a>
+                    <a href="#location" class="nav-link px-3 py-2 text-sm font-medium">Standorte</a>
+                    <a href="#about" class="nav-link px-3 py-2 text-sm font-medium">Über mich</a>
+                    <a href="#contact" class="nav-link px-3 py-2 text-sm font-medium">Kontakt</a>
                 </div>
                 <div class="box-sizing flex items-center space-x-4">
                     <!-- Theme Toggle Button -->
@@ -785,7 +830,7 @@
                     </button>
                     <!-- Mobile Menu Button -->
                     <div class="md:hidden">
-                        <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 p-2">
+                        <button id="mobile-menu-button" class="toggle-button text-gray-700 p-2">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
@@ -799,13 +844,11 @@
 
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu-overlay" class="inset-0 bg-black bg-opacity-50 hidden z-10"></div>
-
-<!-- Mobile Menu Drawer (INITIALL VERBORGEN!) -->
 <div id="mobile-menu-drawer" class="fixed top-0 right-0 h-full w-full bg-white dark:bg-gray-800 shadow-xl transition-transform duration-300 ease-in-out z-50 md:hidden">
     <div class="p-4">
         <div class="flex justify-between items-center mb-6">
             <h2 class="px-4 font-bold text-gray-900 dark:text-white">Menü</h2>
-            <button id="mobile-menu-close" class="mx-auto p-2 block ml-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+            <button id="mobile-menu-close" class="mx-auto p-2 block ml-2 toggle-button">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -813,11 +856,11 @@
         </div>
         
         <nav class="space-y-4 text-ce">
-            <a href="#leistungen" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700 rounded-lg transition-colors">Themengebiete</a>
-            <a href="#pricing" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700 rounded-lg transition-colors">Preise</a>
-            <a href="#location" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700 rounded-lg transition-colors">Standorte</a>
-            <a href="#about" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700 rounded-lg transition-colors">Über mich</a>
-            <a href="#contact" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700 rounded-lg transition-colors">Kontakt</a>
+            <a href="#leistungen" class="toggle-button block py-2 px-4 rounded-lg transition-colors">Themengebiete</a>
+            <a href="#pricing" class="toggle-button block py-2 px-4 rounded-lg transition-colors">Preise</a>
+            <a href="#location" class="toggle-button block py-2 px-4 rounded-lg transition-colors">Standorte</a>
+            <a href="#about" class="toggle-button block py-2 px-4 rounded-lg transition-colors">Über mich</a>
+            <a href="#contact" class="toggle-button block py-2 px-4 rounded-lg transition-colors">Kontakt</a>
         </nav>
     </div>
 </div>
@@ -846,7 +889,7 @@
         </div>
     </section>
 
-    <!-- Leistungen Section -->
+        <!-- Leistungen Section -->
     <section id="leistungen" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -857,7 +900,7 @@
 
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- HTL -->
-                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+                <div class="bg-gray-50 rounded-2xl shadow-lg p-8 border border-gray-100">
                     <div class="flex items-center mb-6">
                         <div class="feature-icon">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -877,36 +920,67 @@
                                 Statik
                             </h4>
                             <ul class="space-y-2 text-gray-600 ml-7">
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Statische Systeme:</strong> Auflagerreaktionen, Auskragungen, Ecken, Schrägen</span>
+
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Statisch bestimmte Systeme</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Auflagerreaktionen, Auskragungen, Ecken, Schrägen, Gelenke
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Fachwerke:</strong> Rundschnitt- und Ritterschnittverfahren, Nullstäbe</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Fachwerke</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Rundschnitt- und Ritterschnittverfahren, Nullstäbe bestimmen
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Schnittgrößen:</strong> Normalkraft, Querkraft, Moment</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Schnittgrößen</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Normalkraft, Querkraft, Moment, Torsion
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Querschnittsberechnung:</strong> Schwerpunkt, Flächenträgheitsmomente</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Querschnittsberechnungen</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Schwerpunkt, Flächenträgheitsmomente, Satz von Steiner
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Temperatur Lastfall</strong></span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Statisch unbestimmte Systeme</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        innterliche- und äußere Unbestimmtheit, Integration mit Tabelle sowie Simpson, Reduktionssatz, Superpositionsprinzip
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Verformungen</strong></span>
-                                    </li>  
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Temperatur Lastfall</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Krümmung, Dehnung, Zwangsspannungen
+                                    </div>
+                                </li>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Verformungen</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Dehnung, Biegung, Verdrehung
+                                    </div>
+                                </li>
+                                
+                            <button onclick="toggleContent(this)" class="toggle-button text-sm font-semibold mt-4 inline-block transition duration-300 ml-0">
+                                +mehr
+                            </button> 
                             </ul>
                         </div>
 
@@ -919,43 +993,57 @@
                                 Tragwerke
                             </h4>
                             <ul class="space-y-2 text-gray-600 ml-7">
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Statische Systeme:</strong> Richtige Aussteifungen finden</span>
+
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Statisches System</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Richtige Aussteifungen finden, Übergang System 1 auf System 2
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Lastenaufstellung:</strong> Eigengewicht, Nutzlast, Schneelast, Windlast</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Lastenaufstellung</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Eigengewicht, Nutzlast, Schneelast, Windlast
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Nachweise:</strong> ULS, SLS</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Stahl und Holzbau</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Spannungsnachweis, Knicknachweis, Verformungsnachweis
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Stahl und Holzbau:</strong> Spannungsnachweis, Knicknachweis, Verformungsnachweis</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Stahl- und Holzverbindungen</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Schrauben, Dübel, Schweißen
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Stahl- und Holzverbindungen:</strong> Schrauben, Dübel, Schweißen</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Stahlbetonbau</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Stützen-, Träger-, Platten-, Bewehrungsbemessung
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Stahlbetonbau:</strong> Stützen-, Träger-, Platten-, Bewehrungsbemessung</span>
-                                </li>
+
+                            <button onclick="toggleContent(this)" class="toggle-button text-sm font-semibold mt-4 inline-block transition duration-300 ml-0">
+                                +mehr
+                            </button> 
                             </ul>
                         </div>
                     </div>
                 </div>
-
                 <!-- Universität -->
-                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+                <div class="bg-gray-50 rounded-2xl shadow-lg p-8 border border-gray-100">
                     <div class="flex items-center mb-6">
                         <div class="feature-icon">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -975,31 +1063,50 @@
                                 Baumechanik 1
                             </h4>
                             <ul class="space-y-2 text-gray-600 ml-7">
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Schwerpunktberechnung</strong></span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Schwerpunktberechnung</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Flächenschwerpunkt, Massenmittelpunkt
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Schnittkraftverläufe:</strong> Freischnitte, Kreisbögen, Schrägen</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Schnittkraftverläufe</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                        Freischnitt, DGL, Kreisbogen, Schrägen, Normalkraft, Querkraft, Moment
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Fachwerke:</strong> Rundschnitt- und Ritterschnittverfahren</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Fachwerk</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Rundschnitt- und Ritterschnittverfahren, Nullstäbe bestimmen 
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Seile und Ketten:</strong> Masseloses Seil, Kettenlinie</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Seile und Ketten</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       masseloses Seil, Kettenlinie
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Reibung:</strong> Haftreibung, Seilreibung</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Reibung</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Haftreibbedingung, Seilreibung, Gleichgewicht
+                                    </div>
                                 </li>
+
+                            <button onclick="toggleContent(this)" class="toggle-button text-sm font-semibold mt-4 inline-block transition duration-300 ml-0">
+                                +mehr
+                            </button> 
                             </ul>
                         </div>
 
@@ -1012,26 +1119,43 @@
                                 Baumechanik 2
                             </h4>
                             <ul class="space-y-2 text-gray-600 ml-7">
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Querschnittsberechnungen:</strong> Statische Momente, Flächenträgheitsmomente, Schubmittelpunkt</span>
+
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Querschnittsberechnung</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Statisches Moment, Flächenträgheitsmomente, Satz von Steiner, Hauptträgheitsmomente, Schubmittelpunkt
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Spannungen:</strong> Hauptspannungen, Normalspannung, Schubspannungen infolge Querkraft und Torsion</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Spannungen</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Normalspannung, Schubspannung aus Querkraft und Torsion, Spannungsnulllinie, Hauptspannungen
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Verformungen:</strong> Verformungsansatz, Randbedingungen, Übergangsbedingungen</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Verformungen</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Verformungsansatz, Drehnung, Biegelinie, schiefe Biegung, Verdrehung, Randbedingungen, Übergangsbedingungen
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Knickstab:</strong> Verformungsansatz, Eigenwerte, Knicklänge</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Knickstab</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Verformungsansatz, Eigenwerte, Knicklänge
+                                    </div>
                                 </li>
+
+                            <button onclick="toggleContent(this)" class="toggle-button text-sm font-semibold mt-4 inline-block transition duration-300 ml-0">
+                                +mehr
+                            </button>  
                             </ul>
                         </div>
 
@@ -1044,21 +1168,51 @@
                                 Baustatik 1
                             </h4>
                             <ul class="space-y-2 text-gray-600 ml-7">
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Statische Bestimmtheit</strong></span>
+
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Statische Bestimmtheit</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Aufbauprinzip, Abzählkriterium
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Schnittgrößen:</strong> Schnittprinzip, PvV und PvK Verfahren, Polpläne</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Statisches System</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Ecken, Schrägen, Gelenke, Federn
+                                    </div>
                                 </li>
-                                <li class="flex items-start">
-                                    <span class="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                                        style="background-color: var(--text-gold);"></span>
-                                    <span><strong>Verformungen:</strong> Tabellen- und Simpson Integration</span>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Schnittgrößen</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Schnittprinzip, PvV und PvK Verfahren, Polpläne, Superpositionsprinzip
+                                    </div>
                                 </li>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Verformungen</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Integration mit Tabelle und Simpson, Reduktionssatz, Auflagerverschiebung
+                                    </div>
+                                </li>
+                                <li class="space-y-1">
+                                    <div class="flex items-start">
+                                        <strong class="item-title text-gray-900">Temperatur Lastfall</strong>
+                                    </div>
+                                    <div class="item-description ml-7 text-gray-600">
+                                       Krümmung, Dehnung, Zwangsspannungen
+                                    </div>
+                                </li>
+
+                             <button onclick="toggleContent(this)" class="toggle-button text-sm font-semibold mt-4 inline-block transition duration-300 ml-0">
+                                +mehr
+                            </button>                               
                             </ul>
                         </div>
                     </div>
@@ -1252,7 +1406,7 @@
                                 <h3 class="text-2xl font-display font-bold mb-4"
                                     style="color: var(--marked-text);">Ihr Nachhilfelehrer für Statik, Tragwerken und Baumechanik</h3>
                                 
-                                <div class="space-y-4 text-gray-600 text-base" style="text-align: justify;">
+                                <div class="space-y-4 text-base" style="color: var(--text-about-me);">
                                 <p>
                                     <em>Hallo!</em> Mein Name ist Rene Perchthaler, 
                                     und ich biete Nachhilfe in den Kernbereichen <strong>Statik</strong>, 
@@ -1261,7 +1415,7 @@
                                     sondern ein <strong>fundiertes und nachhaltiges Verständnis</strong> für das Thema zu entwickeln.
                                 </p>
                                 <hr>
-                                <div class="text-xl">
+                                <div class="text-xl text-gray-900">
                                     <h3>Mein Hintergrund</h3>
                                 </div>
                                 
@@ -1278,11 +1432,11 @@
                         <div class="flex flex-col sm:flex-row gap-8 mb-8 items-start">
     
                         <div class="flex-grow">
-                            <div class="space-y-4 text-gray-600 text-base" style="text-align: justify;">
+                            <div class="space-y-4 text-base" style="text-align: justify; color: var(--text-about-me);">
                                 
                                 <hr class="mb-6" style="border-top-color: #ddd;">
                                 
-                                <h3 class="text-xl mb-4">
+                                <h3 class="text-xl mb-4 text-gray-900">
                                     Mein Ansatz: Erfolgreich und Motivierend
                                 </h3>
                                 
@@ -1297,17 +1451,17 @@
                                         <span class="font-bold flex-shrink-0 mr-2" style="color: var(--marked-text);">
                                             Fundierte Grundlagen:
                                         </span> 
-                                        <span class="text-gray-600 text-justify">
+                                        <span class="text-justify" style="color: var(--text-about-me);">
                                             Wir erarbeiten gemeinsam die notwendigen <strong>Grundprinzipien</strong> und 
                                             <strong>Rechenmethoden</strong>, um auch komplexe Aufgabenstellungen souverän lösen zu können.
                                         </span>
-                                    </div>
+                                    </div> 
                                     
                                     <div class="flex">
                                         <span class="font-bold flex-shrink-0 mr-2" style="color: var(--marked-text);">
                                             Prüfungsvorbereitung:
                                         </span>
-                                        <span class="text-gray-600 text-justify">
+                                        <span class="text-justify" style="color: var(--text-about-me);">
                                             Ich kenne die Anforderungen aus der <strong>HTL</strong> und dem <strong>TU-Umfeld</strong> und bereite 
                                             dich gezielt auf Schularbeiten, Tests, Klausuren und die Matura vor.
                                         </span>
@@ -1317,7 +1471,7 @@
                                         <span class="font-bold flex-shrink-0 mr-2" style="color: var(--marked-text);">
                                             Individuelle Betreuung:
                                         </span>
-                                        <span class="text-gray-600 text-justify">
+                                        <span class="text-justify" style="color: var(--text-about-me);">
                                             Der Fokus liegt auf deinen <strong>individuellen Schwierigkeiten</strong> und deinem 
                                             <strong>Lerntempo</strong>.
                                         </span>
@@ -1327,7 +1481,7 @@
                                         <span class="font-bold flex-shrink-0 mr-2" style="color: var(--marked-text);">
                                             Motivation:
                                         </span>
-                                        <span class="text-gray-600 text-justify">
+                                        <span class="text-justify" style="color: var(--text-about-me);">
                                             Mich motiviert es, <strong>anderen zu helfen</strong> und diesen Moment zu sehen, 
                                             wenn es bei einem Schüler "Klick" macht.
                                         </span>
@@ -1347,13 +1501,13 @@
                         <div class="mt-8 grid grid-cols-2 gap-4">
                             <div class="text-center">
                                 <div class="text-3xl font-bold"
-                                    style="color: var(--marked-text);">Bessere Noten</div>
-                                <div class="text-sm text-gray-500">Was du beskommst</div>
+                                    style="color: var(--marked-text);">Links</div>
+                                <div class="text-sm text-gray-500">Untertitel links</div>
                             </div>
                             <div class="text-center">
                                 <div class="text-3xl font-bold"
-                                    style="color: var(--marked-text);">Money</div>
-                                <div class="text-sm text-gray-500">Was es kostet</div>
+                                    style="color: var(--marked-text);">Rechts</div>
+                                <div class="text-sm text-gray-500">Untertitel rechts</div>
                             </div>
                         </div>
                     </div>
@@ -1402,10 +1556,14 @@
                                 submitBtn.textContent = "Erfolgreich gesendet!";
                                 submitBtn.classList.remove("bg-[#3f6a89]");
                                 submitBtn.style.backgroundColor = "#008700";
+                                submitBtn.disabled = true;
+                                submitBtn.classList.add("sent-success");
                             } else {
                                 submitBtn.disabled = false;
                                 submitBtn.textContent = "Senden fehlgeschlagen!";
                                 submitBtn.style.backgroundColor = "#a20000";
+                                submitBtn.disabled = true;
+                                submitBtn.classList.add("sent-success");
                             }
                             });
                         });
@@ -1654,19 +1812,16 @@
                 closeMobileMenu();
             }
         });
-        // --- FUNKTION: FISHER-YATES SHUFFLE (mischt die Anordnung) ---
+        // --- FUNKTION: FISHER-YATES SHUFFLE ---
             function shuffleArray(array) {
                 for (let i = array.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [array[i], array[j]] = [array[j], array[i]];
                 }
             }
-            // --- ENDE SHUFFLE FUNKTION ---
 
             const backgroundContainer = document.getElementById('background-container');
             
-            // **!!! HIER ALLE PFADE IHRER BILDER EINFÜGEN !!!**
-            // (Achten Sie darauf, dass der Pool mindestens 1 Bild enthält!)
             const lightModeImagesPool = [
                 'bg_pictures/light_mode/Bild_1.png',
                 'bg_pictures/light_mode/Bild_2.png',
@@ -1675,11 +1830,9 @@
                 'bg_pictures/light_mode/Bild_5.png',
                 'bg_pictures/light_mode/Bild_6.png',
                 'bg_pictures/light_mode/Bild_7.png',
-                // Füge hier weitere Bilder hinzu...
             ];
 
             const darkModeImagesPool = [
-                // Diese Bilder MÜSSEN den Light Mode Bildern positionsweise entsprechen!
                 'bg_pictures/dark_mode/Bild_1.png',
                 'bg_pictures/dark_mode/Bild_2.png',
                 'bg_pictures/dark_mode/Bild_3.png',
@@ -1689,134 +1842,102 @@
                 'bg_pictures/dark_mode/Bild_7.png',
             ];
 
-                    // DEFINIERE DEN PFAD FÜR DEN LEEREN PLATZHALTER (optional, nur als Flag nötig)
             const EMPTY_IMAGE_PATH = 'bg_pictures/Bild_empty.png'; 
             
-            // NEU: 6 Reihen x 3 Spalten = 18 Positionen
             const NUM_GRID_POSITIONS = 18; 
             
-            // Bleibt Index 1, da es die 2. Zelle im gesamten 18er-Raster ist
             const EMPTY_POSITION_INDEX = 1;
 
-            // Globale Sets: Die ZUFÄLLIG ausgewählten und GEMISCHTEN Bilder (Persistenz)
             let selectedLightImages = [];
             let selectedDarkImages = [];
 
-            // KORRIGIERT: Wählt N Bilder zufällig aus dem Pool und MUSS den Pool erweitern, falls er zu klein ist.
             function selectAndShuffleImages(pool, numImages) {
                 if (pool.length === 0) return [];
                 
                 const poolCopy = [...pool];
                 
-                // 1. POOL ERWEITERN/WIEDERHOLEN, falls der Pool kleiner als die benötigten 9 Bilder ist
                 const sourceImages = [];
                 while (sourceImages.length < numImages) {
                     sourceImages.push(...poolCopy);
                 }
                 
-                // 2. Den großen Pool mischen, um eine zufällige Auswahl zu treffen
                 shuffleArray(sourceImages); 
 
-                // 3. Nur die ersten N Bilder nehmen
                 const selected = sourceImages.slice(0, numImages); 
                 
-                // 4. Die ausgewählten Bilder noch einmal mischen, um die Anordnung zufällig zu machen
                 shuffleArray(selected); 
                 
                 return selected;
             }
 
-            // Initialisiert die zufällige Auswahl einmalig beim Laden der Seite
             function initializeRandomSelection() {
-                // Die ZUFÄLLIGE Anordnung wird HIER fest für die gesamte Sitzung bestimmt
                 const randomIndexes = Array.from({length: lightModeImagesPool.length}, (_, i) => i);
                 shuffleArray(randomIndexes);
                 
-                // Zähler für die zufälligen Bilder aus dem Pool
                 let currentRandomImageCount = 0; 
 
-                // Stellt sicher, dass die finalen Sets 18 Positionen füllen
                 for (let i = 0; i < NUM_GRID_POSITIONS; i++) {
                     
                     if (i === EMPTY_POSITION_INDEX) {
-                        // An Position 1 (oben mittig) fügen wir den Platzhalter ein
                         selectedLightImages.push(EMPTY_IMAGE_PATH);
                         selectedDarkImages.push(EMPTY_IMAGE_PATH);
-                        continue; // Springe zur nächsten Position
+                        continue;
                     }
                     
-                    // Index basierend auf dem Shuffle-Ergebnis
-                    // Wir verwenden den Modulo-Operator, um den Pool bei Bedarf zu wiederholen
                     const index = randomIndexes[currentRandomImageCount % randomIndexes.length]; 
                     
-                    // Füllt die finalen Arrays
                     selectedLightImages.push(lightModeImagesPool[index]);
                     
                     if (darkModeImagesPool[index]) {
                         selectedDarkImages.push(darkModeImagesPool[index]);
                     } else {
-                        // Fallback
                         selectedDarkImages.push(lightModeImagesPool[index]); 
                     }
                     
-                    currentRandomImageCount++; // Zähler nur erhöhen, wenn ein echtes Bild verwendet wurde
+                    currentRandomImageCount++;
                 }
             }
             
-            // Füllt das Grid mit den ausgewählten <img> Elementen
             function renderGridImages() {
                 backgroundContainer.innerHTML = '';
                 
                 const currentTheme = document.documentElement.getAttribute('data-theme');
                 const isDarkMode = currentTheme === 'dark';
                 
-                // Wählt das ZUFÄLLIGE und PERSISTENTE Set aus
                 const currentSet = isDarkMode ? selectedDarkImages : selectedLightImages;
                 
-                // Stellt sicher, dass wir maximal 9 Bilder rendern
                 const maxRenderCount = Math.min(currentSet.length, NUM_GRID_POSITIONS);
                 
                 for (let i = 0; i < maxRenderCount; i++) {
                     const img = document.createElement('img');
                     img.classList.add('bg-image');
                     
-                    // Setzt die Quelle des PERSISTENTEN Bildes
                     img.src = currentSet[i];
                     
-                    // Zufälliger Z-Index, um sicherzustellen, dass das Overlay sichtbar ist
                     img.style.zIndex = Math.floor(Math.random() * 99); 
                     
                     backgroundContainer.appendChild(img);
                 }
             }
             
-            // 1. Initialisieren (Mischen & persistente Sets erstellen)
             initializeRandomSelection(); 
             renderGridImages(); 
 
-            // 2. Listener für den Theme-Wechsel
             const themeToggleButton = document.getElementById('theme-toggle'); 
             
             if (themeToggleButton) {
                 themeToggleButton.addEventListener('click', () => {
-                    // Ruft nur die Render-Funktion auf, die die persistenten Sets verwendet
                     setTimeout(renderGridImages, 100); 
                 });
             }
-
-            // --- NEUER JAVASCRIPT BLOCK FÜR PARALLAX-SCROLL ---
     
-            // Die Geschwindigkeit (0.0 bis 1.0). 0.5 bedeutet halbe Geschwindigkeit.
             const PARALLAX_SPEED = 0.4; 
             let lastScrollY = 0;
             let ticking = false;
 
             function updateParallax() {
-                // Berechnet die vertikale Verschiebung (Parallax-Effekt)
-                // newY ist der Abstand, um den der Hintergrund nach oben (negativ) verschoben wird.
                 const newY = lastScrollY * PARALLAX_SPEED; 
                 
-                // Wendet die Verschiebung mit 'translateY' an (bewegt den Hintergrund entgegen der Scroll-Richtung)
                 backgroundContainer.style.transform = `translateY(-${newY}px)`;
                 
                 ticking = false;
@@ -1825,20 +1946,44 @@
             function handleScroll() {
                 lastScrollY = window.scrollY;
 
-                // Nutzt requestAnimationFrame für eine flüssige Darstellung (Performancesteigerung)
                 if (!ticking) {
                     window.requestAnimationFrame(updateParallax);
                     ticking = true;
                 }
             }
 
-            // Fügt den Scroll-Listener hinzu
             window.addEventListener('scroll', handleScroll, { passive: true });
 
-            // Stelle sicher, dass der Parallax-Effekt auch beim Laden der Seite angewendet wird
             updateParallax(); 
+            
+        function toggleContent(button) {
+            const topicContainer = button.parentElement;
+            
+            const descriptions = Array.from(topicContainer.querySelectorAll('.item-description')); 
 
-            // --- ENDE NEUER BLOCK ---
+            const isClosed = button.textContent.includes('+mehr');
+            
+            const delayStep = 50; 
+
+            if (isClosed) {
+                descriptions.forEach((desc, index) => {
+                    setTimeout(() => {
+                        desc.classList.add('open');
+                    }, index * delayStep);
+                });
+                button.textContent = '-weniger';
+                
+            } else {
+                
+                descriptions.slice().reverse().forEach((desc, index) => {
+                    setTimeout(() => {
+                        desc.classList.remove('open');
+                    }, index * delayStep);
+                });
+
+                button.textContent = '+mehr';
+            }
+        }
     </script>
     
     </body></html>
