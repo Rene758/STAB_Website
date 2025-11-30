@@ -110,9 +110,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
 
-        
         .section-divider {
             width: 150px;
             height: 6px;
@@ -338,7 +336,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 300%;
+            height: 500%;
             z-index: -2; 
             overflow: hidden; 
             
@@ -346,8 +344,8 @@
             
             /* --- CSS GRID FÜR 3x3 LAYOUT --- */
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /*Spalten*/ 
-            grid-template-rows: repeat(6, 1fr); /*Reihen*/
+            grid-template-columns: repeat(1, 1fr); /*Spalten*/ 
+            grid-template-rows: repeat(12, 1fr); /*Reihen*/
             gap: 0.0vw; 
         }
 
@@ -721,6 +719,7 @@
         .text-5xl{font-size:3rem;line-height:1}
         .text-lg{font-size:1.125rem;line-height:1.75rem}
         .text-sm{font-size:0.875rem;line-height:1.25rem}
+        .text-xs{font-size:0.6rem;line-height:1.0rem}
         .text-xl{font-size:1.25rem;line-height:1.75rem}
         .text-3xl{font-size:1.875rem;line-height:2.25rem}
         .font-bold{font-weight:700}
@@ -826,8 +825,9 @@
                         </svg>
                     </button>
                 </div>
-        </div>
+        </div> 
     </div>
+</div>
 </nav>
 
 <!-- Mobile Menu Overlay -->
@@ -881,8 +881,8 @@
     <!-- Leistungen Section -->
     <section id="leistungen" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-display font-bold text-gray-900 mb-2">Themengebiete</h2>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-display font-bold text-gray-900 mb-0">Themengebiete</h2>
                 <div class="section-divider"></div>
             </div>
 
@@ -895,7 +895,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-display font-bold text-gray-900 ml-2">HTL</h3>
+                        <h3 class="text-lg font-display font-bold text-gray-900 ml-2">HTL</h3>
                     </div>
 
                     <div class="space-y-6">
@@ -907,7 +907,7 @@
                                 </svg>
                                 Statik
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7">
+                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
 
                                 <li class="space-y-1">
                                     <div class="flex items-start">
@@ -980,7 +980,7 @@
                                 </svg>
                                 Tragwerke
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7">
+                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
 
                                 <li class="space-y-1">
                                     <div class="flex items-start">
@@ -1050,7 +1050,7 @@
                                 </svg>
                                 Baumechanik 1
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7">
+                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
                                 <li class="space-y-1">
                                     <div class="flex items-start">
                                         <strong class="item-title text-gray-900">Schwerpunktberechnung</strong>
@@ -1106,7 +1106,7 @@
                                 </svg>
                                 Baumechanik 2
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7">
+                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
 
                                 <li class="space-y-1">
                                     <div class="flex items-start">
@@ -1155,7 +1155,7 @@
                                 </svg>
                                 Baustatik 1
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7">
+                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
 
                                 <li class="space-y-1">
                                     <div class="flex items-start">
@@ -1210,12 +1210,12 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-gray-50">
+    <section id="pricing" class="py-20" style="background-color: var(--secondary-color_trans)">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-display font-bold text-gray-900 mb-0">Preise</h2>
                 <div class="section-divider"></div>
-                <p class="mt-3 text-sm text-gray-500">erste Probestunde ist GRATIS</p>
+                <p class="mt-3 text-sm text-gray-800">erste Probestunde ist GRATIS</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -1356,29 +1356,139 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-display font-bold text-gray-900 mb-0">Über mich</h2>
-                <div class="section-divider"></div>
-            </div>
+<section id="about" class="py-12 sm:py-20" style="background-color: var(--secondary-color_trans);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 sm:mb-16">
+            <h2 class="text-3xl font-display font-bold text-gray-900 mb-1">Über mich</h2>
+            <div class="section-divider"></div>
+        </div>
 
-            <div class="card" style="text-align: center;">
-            <div style="width: 120px; height: 120px; background: var(--border); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem;">👤</div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">KEine AHnunG</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">bla bla bla bla bla bla</p>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 300px; margin: 0 auto;">
-                <div>
-                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent);">hä</div>
-                    <div style="font-size: 0.875rem; color: var(--text-secondary);">Text1</div>
-                </div>
-                <div>
-                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent);">lol</div>
-                    <div style="font-size: 0.875rem; color: var(--text-secondary);">Text2</div>
+        <div class="grid lg:grid-cols-1 gap-8 items-start">
+            <div class="order-1">
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
+
+                    <div class="flex flex-col gap-6 sm:gap-8 mb-8 items-start">
+
+                        <div class="sm:w-1/3 flex-shrink-0 sm:max-w-sm sm:mr-8">
+                            <img src="bg_pictures/Me.png"
+                                width="400"
+                                height="500"
+                                class="rounded-2xl object-cover w-full h-auto max-h-96 mx-auto shadow-md">
+                        </div>
+
+                        <div class="flex-grow order-2 sm:order-none mt-6">
+                                <h3 class="text-2xl font-display font-bold mb-4"
+                                    style="color: var(--marked-text);">Ihr Nachhilfelehrer für Statik, Tragwerken und Baumechanik</h3>
+
+                            <div class="space-y-4 text-base text-sm" style="text-align: justify; color: var(--text-about-me);">
+                                <p>
+                                    <em>Hallo!</em> Mein Name ist Rene Perchthaler,
+                                    und ich biete Nachhilfe in den Kernbereichen <strong>Statik</strong>,
+                                    <strong>Tragwerke</strong> und <strong>Baumechanik</strong> an.
+                                    Mein Ziel ist es, dir nicht nur zu helfen die aktuellen Prüfungen zu bestehen,
+                                    sondern ein <strong>fundiertes und nachhaltiges Verständnis</strong> für das Thema zu entwickeln.
+                                </p>
+                                <hr>
+                                <div class="text-lg sm:text-xl text-gray-900">
+                                    <h3>Mein Hintergrund</h3>
+                                </div>
+
+                                <p>
+                                    Mein Weg in die Welt des Bauingenieurwesens begann an der <strong>HTBLVA Ortwein</strong>,
+                                    wo ich 2024 erfolgreich die Matura abgelegt habe.
+                                    Bereits während meiner Zeit dort habe ich meine Leidenschaft für die Materie entdeckt und mein Wissen aktiv geteilt:
+                                    Ich habe meinen Mitschülern in Statik <strong>intensiv geholfen und bis zur Matura</strong> begleitet.
+                                    Aktuell vertiefe ich mein Fachwissen im <strong>Bauingenieurwesen-Studium</strong> an der <strong>Technischen Universität Graz</strong>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-6 sm:gap-8 mb-4 items-start">
+                        <div class="flex-grow">
+                            <div class="space-y-4 text-base text-sm" style="text-align: justify; color: var(--text-about-me);">
+
+                                <hr class="mb-6" style="border-top-color: #ddd;">
+
+                                <h3 class="text-lg sm:text-xl mb-4 text-gray-900" style="text-align: left;">
+                                    Mein Ansatz: Erfolgreich und Motivierend
+                                </h3>
+
+                                <p>
+                                    Ich bin davon überzeugt, dass der Schlüssel zum Erfolg in der <strong>Statik</strong> in der
+                                    <strong>Visualisierung und dem schrittweisen Aufbau</strong> des Verständnisses liegt.
+                                </p>
+
+                                <div class="space-y-4 pt-2">
+
+                                    <div class="block">
+                                        <span class="font-bold block mb-1 sm:inline sm:mr-2" style="color: var(--marked-text);">
+                                            Fundierte Grundlagen:
+                                        </span>
+                                        <span class="text-justify" style="color: var(--text-about-me);">
+                                            Wir erarbeiten gemeinsam die notwendigen <strong>Grundprinzipien</strong> und
+                                            <strong>Rechenmethoden</strong>, um auch komplexe Aufgabenstellungen souverän lösen zu können.
+                                        </span>
+                                    </div>
+
+                                    <div class="block">
+                                        <span class="font-bold block mb-1 sm:inline sm:mr-2" style="color: var(--marked-text);">
+                                            Prüfungsvorbereitung:
+                                        </span>
+                                        <span class="text-justify" style="color: var(--text-about-me);">
+                                            Ich kenne die Anforderungen aus der <strong>HTL</strong> und dem <strong>TU-Umfeld</strong> und bereite
+                                            dich gezielt auf Schularbeiten, Tests, Klausuren und die Matura vor.
+                                        </span>
+                                    </div>
+
+                                    <div class="block">
+                                        <span class="font-bold block mb-1 sm:inline sm:mr-2" style="color: var(--marked-text);">
+                                            Individuelle Betreuung:
+                                        </span>
+                                        <span class="text-justify" style="color: var(--text-about-me);">
+                                            Der Fokus liegt auf deinen <strong>individuellen Schwierigkeiten</strong> und deinem
+                                            <strong>Lerntempo</strong>.
+                                        </span>
+                                    </div>
+
+                                    <div class="block">
+                                        <span class="font-bold block mb-1 sm:inline sm:mr-2" style="color: var(--marked-text);">
+                                            Motivation:
+                                        </span>
+                                        <span class="text-justify" style="color: var(--text-about-me);">
+                                            Mich motiviert es, <strong>anderen zu helfen</strong> und diesen Moment zu sehen,
+                                            wenn es bei einem Schüler "Klick" macht.
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <p class="pt-4">
+                                    Wenn du Unterstützung suchst, um Beispiele dieser Art nicht nur zu berechnen, sondern auch zu
+                                    <strong>verstehen</strong>, freue ich mich auf deine Nachricht!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-6">
+
+                    <div class="mt-4 sm:mt-8 grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="text-1xl sm:text-2xl font-bold"
+                                style="color: var(--marked-text);">15+</div>
+                            <div class="text-xs sm:text-sm text-gray-500">Schülern geholfen</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-1xl sm:text-2xl font-bold"
+                                style="color: var(--marked-text);">Erfolgreicher HTL Abschluss</div>
+                            <div class="text-xs sm:text-sm text-gray-500">1er Matura in Statik</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
@@ -1393,14 +1503,14 @@
                 <div class="bg-gray-50 rounded-2xl p-8">
                     <h3 class="text-lg font-display font-bold text-gray-900 mb-6">Kontaktformular</h3>
                     
-                    <form action="https://formspree.io/f/mwpabrgo" method="POST" class="space-y-6">
+                    <form action="https://formspree.io/f/mblblnjr5" method="POST" class="space-y-6">
                         <script>
                             document.addEventListener("DOMContentLoaded", () => {
                             const form = document.querySelector("#contact form");
                             const submitBtn = form.querySelector("button[type='submit']");
 
                             form.addEventListener("submit", async (e) => {
-                            e.preventDefault(); // Verhindert neues Fenster / Redirect
+                            e.preventDefault();
 
                             submitBtn.disabled = true;
                             submitBtn.textContent = "Wird gesendet...";
@@ -1415,14 +1525,18 @@
                             });
 
                             if (res.ok) {
-                                form.reset(); // Felder leeren
+                                form.reset()
                                 submitBtn.textContent = "Erfolgreich gesendet!";
                                 submitBtn.classList.remove("bg-[#3f6a89]");
-                                submitBtn.classList.add("bg-green-500");
+                                submitBtn.style.backgroundColor = "#008700";
+                                submitBtn.disabled = true;
+                                submitBtn.classList.add("sent-success");
                             } else {
                                 submitBtn.disabled = false;
-                                submitBtn.textContent = "Fehler – erneut versuchen";
-                                submitBtn.classList.add("bg-red-500");
+                                submitBtn.textContent = "Senden fehlgeschlagen!";
+                                submitBtn.style.backgroundColor = "#a20000";
+                                submitBtn.disabled = true;
+                                submitBtn.classList.add("sent-success");
                             }
                             });
                         });
@@ -1527,6 +1641,7 @@
             </div>
         </div>
     </footer>
+</div>
 
     <script>
         // Theme Toggle Functionality
@@ -1590,13 +1705,6 @@
                         </svg>
                     `;
                     
-                    setTimeout(() => {
-                        submitBtn.innerHTML = `
-                            Nachricht gesendet! ✓
-                        `;
-                        submitBtn.classList.remove('btn-primary');
-                        submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-                    }, 2000);
                 });
             }
         });
@@ -1647,5 +1755,177 @@
                 closeMobileMenu();
             }
         });
+        // --- FUNKTION: FISHER-YATES SHUFFLE ---
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            const backgroundContainer = document.getElementById('background-container');
+            
+            const lightModeImagesPool = [
+                'bg_pictures/light_mode/Bild_1.png',
+                'bg_pictures/light_mode/Bild_2.png',
+                'bg_pictures/light_mode/Bild_3.png',
+                'bg_pictures/light_mode/Bild_4.png',
+                'bg_pictures/light_mode/Bild_5.png',
+                'bg_pictures/light_mode/Bild_6.png',
+                'bg_pictures/light_mode/Bild_7.png',
+            ];
+
+            const darkModeImagesPool = [
+                'bg_pictures/dark_mode/Bild_1.png',
+                'bg_pictures/dark_mode/Bild_2.png',
+                'bg_pictures/dark_mode/Bild_3.png',
+                'bg_pictures/dark_mode/Bild_4.png',
+                'bg_pictures/dark_mode/Bild_5.png',
+                'bg_pictures/dark_mode/Bild_6.png',
+                'bg_pictures/dark_mode/Bild_7.png',
+            ];
+
+            const EMPTY_IMAGE_PATH = 'bg_pictures/Bild_empty.png'; 
+            
+            const NUM_GRID_POSITIONS = 18; 
+            
+            const EMPTY_POSITION_INDEX = [0,1];
+
+            let selectedLightImages = [];
+            let selectedDarkImages = [];
+
+            function selectAndShuffleImages(pool, numImages) {
+                if (pool.length === 0) return [];
+                
+                const poolCopy = [...pool];
+                
+                const sourceImages = [];
+                while (sourceImages.length < numImages) {
+                    sourceImages.push(...poolCopy);
+                }
+                
+                shuffleArray(sourceImages); 
+
+                const selected = sourceImages.slice(0, numImages); 
+                
+                shuffleArray(selected); 
+                
+                return selected;
+            }
+
+            function initializeRandomSelection() {
+                const randomIndexes = Array.from({length: lightModeImagesPool.length}, (_, i) => i);
+                shuffleArray(randomIndexes);
+                
+                let currentRandomImageCount = 0; 
+
+                for (let i = 0; i < NUM_GRID_POSITIONS; i++) {
+                    
+                    if (i === EMPTY_POSITION_INDEX[i]) {
+                        selectedLightImages.push(EMPTY_IMAGE_PATH);
+                        selectedDarkImages.push(EMPTY_IMAGE_PATH);
+                        continue;
+                    }
+                    
+                    const index = randomIndexes[currentRandomImageCount % randomIndexes.length]; 
+                    
+                    selectedLightImages.push(lightModeImagesPool[index]);
+                    
+                    if (darkModeImagesPool[index]) {
+                        selectedDarkImages.push(darkModeImagesPool[index]);
+                    } else {
+                        selectedDarkImages.push(lightModeImagesPool[index]); 
+                    }
+                    
+                    currentRandomImageCount++;
+                }
+            }
+            
+            function renderGridImages() {
+                backgroundContainer.innerHTML = '';
+                
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const isDarkMode = currentTheme === 'dark';
+                
+                const currentSet = isDarkMode ? selectedDarkImages : selectedLightImages;
+                
+                const maxRenderCount = Math.min(currentSet.length, NUM_GRID_POSITIONS);
+                
+                for (let i = 0; i < maxRenderCount; i++) {
+                    const img = document.createElement('img');
+                    img.classList.add('bg-image');
+                    
+                    img.src = currentSet[i];
+                    
+                    img.style.zIndex = Math.floor(Math.random() * 99); 
+                    
+                    backgroundContainer.appendChild(img);
+                }
+            }
+            
+            initializeRandomSelection(); 
+            renderGridImages(); 
+
+            const themeToggleButton = document.getElementById('theme-toggle'); 
+            
+            if (themeToggleButton) {
+                themeToggleButton.addEventListener('click', () => {
+                    setTimeout(renderGridImages, 100); 
+                });
+            }
+    
+            const PARALLAX_SPEED = 0.4; 
+            let lastScrollY = 0;
+            let ticking = false;
+
+            function updateParallax() {
+                const newY = lastScrollY * PARALLAX_SPEED; 
+                
+                backgroundContainer.style.transform = `translateY(-${newY}px)`;
+                
+                ticking = false;
+            }
+
+            function handleScroll() {
+                lastScrollY = window.scrollY;
+
+                if (!ticking) {
+                    window.requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            updateParallax(); 
+            
+        function toggleContent(button) {
+            const topicContainer = button.parentElement;
+            
+            const descriptions = Array.from(topicContainer.querySelectorAll('.item-description')); 
+
+            const isClosed = button.textContent.includes('+mehr');
+            
+            const delayStep = 50; 
+
+            if (isClosed) {
+                descriptions.forEach((desc, index) => {
+                    setTimeout(() => {
+                        desc.classList.add('open');
+                    }, index * delayStep);
+                });
+                button.textContent = '-weniger';
+                
+            } else {
+                
+                descriptions.slice().reverse().forEach((desc, index) => {
+                    setTimeout(() => {
+                        desc.classList.remove('open');
+                    }, index * delayStep);
+                });
+
+                button.textContent = '+mehr';
+            }
+        }
     </script>  
     </body></html>
