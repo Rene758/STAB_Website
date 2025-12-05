@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script>
+         <script>
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.documentElement.setAttribute('data-theme', savedTheme);
             }
-            if (!(/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent))) {
-                window.location.href = "index.html";
+            if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.location.href = "web_mobile.html";
             }
 
         </script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nachhilfe STAB - Statik, Tragwerke, Baumechanik</title>
+    <meta name="description"
+        content="Nachhilfe in Statik, Tragwerken & Baumechanik. Für HTL & Uni in Graz oder Online. Individuelle Prüfungsvorbereitung. Jetzt anfragen!">
     <script src="./Nachhilfe STAB - Statik, Tragwerke, Baumechanik_files/saved_resource"></script><style type="text/css" id="operaUserStyle"></style>
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -83,10 +85,10 @@
         }
 
         .item-description.open {
-            max-height: 120px; 
+            max-height: 90px; 
             margin-bottom: 8px; 
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-primary);
@@ -112,7 +114,9 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
 
+        
         .section-divider {
             width: 150px;
             height: 6px;
@@ -139,7 +143,7 @@
         [data-theme="dark"] .nav-link:hover {
             color: var(--hover-color) !important;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -157,7 +161,7 @@
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
@@ -172,7 +176,7 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .btn-primary.sent-success:hover {
             transform: translateY(0px) !important;
             box-shadow: none !important;
@@ -308,7 +312,7 @@
             color: var(--text-primary);
             border-color: var(--border-light);
         }
-        
+
         [data-theme="dark"] .form-input:focus {
             border-color: var(--accent-color);
         }
@@ -358,16 +362,16 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 500%;
+            height: 300%;
             z-index: -2; 
             overflow: hidden; 
             
-            transition: transform 0.1s ease-out; 
+            transition: transform 0.2s ease-out; 
             
             /* --- CSS GRID FÜR 3x3 LAYOUT --- */
             display: grid;
-            grid-template-columns: repeat(1, 1fr); /*Spalten*/ 
-            grid-template-rows: repeat(12, 1fr); /*Reihen*/
+            grid-template-columns: repeat(3, 1fr); /*Spalten*/ 
+            grid-template-rows: repeat(6, 1fr); /*Reihen*/
             gap: 0.0vw; 
         }
 
@@ -531,6 +535,7 @@
         ::before{--tw-content:''}
         :host,
         html{
+            scroll-behavior: smooth;
             line-height:1.5;
             -webkit-text-size-adjust:100%;
             -moz-tab-size:4;tab-size:4;
@@ -741,7 +746,6 @@
         .text-5xl{font-size:3rem;line-height:1}
         .text-lg{font-size:1.125rem;line-height:1.75rem}
         .text-sm{font-size:0.875rem;line-height:1.25rem}
-        .text-xs{font-size:0.6rem;line-height:1.0rem}
         .text-xl{font-size:1.25rem;line-height:1.75rem}
         .text-3xl{font-size:1.875rem;line-height:2.25rem}
         .font-bold{font-weight:700}
@@ -819,7 +823,7 @@
         }
     </style>
 
-  </head>
+</head>
 <body class="min-h-screen">
 <div class="background-container" id="background-container"></div>
 <div id="page-wrapper">
@@ -830,26 +834,38 @@
             <div class="flex-shrink-0">
                 <h1 class="text-2xl font-bold text-gradient">STAB</h1>
             </div>
-                
-                <!-- Theme Toggle Button -->
-                 <div class="max-w-2xl">
-                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-400 dark:bg-gray-400 transition-colors duration-200" aria-label="Theme toggle">
-                        <svg id="theme-toggle-dark-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            
+            <!-- Desktop Navigation -->
+            <div class=" md:flex items-center space-x-4">
+                <div class="hidden md:flex items-baseline space-x-8">
+                    <a href="#leistungen" class="nav-link px-3 py-2 text-sm font-medium">Themengebiete</a>
+                    <a href="#pricing" class="nav-link px-3 py-2 text-sm font-medium">Preise</a>
+                    <a href="#location" class="nav-link px-3 py-2 text-sm font-medium">Standorte</a>
+                    <a href="#about" class="nav-link px-3 py-2 text-sm font-medium">Über mich</a>
+                    <a href="#contact" class="nav-link px-3 py-2 text-sm font-medium">Kontakt</a>
+                </div>
+                <div class="box-sizing flex items-center space-x-4">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-400 hover:bg-gray-300 dark:bg-gray-400 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Theme toggle">
+                        <svg id="theme-toggle-dark-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
-                        <svg id="theme-toggle-light-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <button id="mobile-menu-button" class="toggle-button p-2">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 26 26" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h20M4 12h20M4 18h20"></path>
-                        </svg>
-                    </button>
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="toggle-button text-gray-700 p-2">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-        </div> 
+            </div> 
+        </div>
     </div>
-</div>
 </nav>
 
 <!-- Mobile Menu Overlay -->
@@ -865,24 +881,23 @@
             </button>
         </div>
         
-        <nav class="space-y-4 text-ce mb-2 mt-2">
-            <a href="#leistungen" class="text-sm toggle-button block py-2 px-4 rounded-lg">Themengebiete</a>
-            <a href="#pricing" class="text-sm toggle-button block py-2 px-4 rounded-lg">Preise</a>
-            <a href="#location" class="text-sm toggle-button block py-2 px-4 rounded-lg">Standorte</a>
-            <a href="#about" class="text-sm toggle-button block py-2 px-4 rounded-lg">Über mich</a>
-            <a href="#contact" class="text-sm toggle-button block py-2 px-4 rounded-lg">Kontakt</a>
+        <nav class="space-y-4 text-ce">
+            <a href="#leistungen" class="toggle-button block py-2 px-4 rounded-lg">Themengebiete</a>
+            <a href="#pricing" class="toggle-button block py-2 px-4 rounded-lg">Preise</a>
+            <a href="#location" class="toggle-button block py-2 px-4 rounded-lg">Standorte</a>
+            <a href="#about" class="toggle-button block py-2 px-4 rounded-lg">Über mich</a>
+            <a href="#contact" class="toggle-button block py-2 px-4 rounded-lg">Kontakt</a>
         </nav>
     </div>
 </div>
-
     <!-- Hero Section -->
     <section class="hero-pattern pt-24 pb-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h1 class="text-4xl md:text-7xl font-display font-bold text-gray-900 mb-6">
+                <h1 class="text-5xl md:text-7xl font-display font-bold text-gray-900 mb-6">
                     Nachhilfe <span class="text-gradient">STAB</span>
                 </h1>
-                <p class="text-sm md:text-2xl text-gray-700 mb-16 max-w-1xl mx-auto">
+                <p class="text-xl md:text-2xl text-gray-700 mb-16 max-w-3xl mx-auto">
                     Statik • Tragwerke • Aufarbeitung • Baumechanik
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -900,12 +915,13 @@
         </div>
     </section>
 
-    <!-- Leistungen Section -->
+        <!-- Leistungen Section -->
     <section id="leistungen" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-display font-bold text-gray-900 mb-0">Themengebiete</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-display font-bold text-gray-900 mb-2">Themengebiete</h2>
                 <div class="section-divider"></div>
+                <p class="text-xl text-gray-700 mt-6">Umfassende Unterstützung in allen Bereichen der Statik und Baumechanik</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12">
@@ -917,7 +933,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-display font-bold text-gray-900 ml-2">HTL</h3>
+                        <h3 class="text-2xl font-display font-bold text-gray-900 ml-2">HTL</h3>
                     </div>
 
                     <div class="space-y-6">
@@ -929,7 +945,7 @@
                                 </svg>
                                 Statik
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
+                            <ul class="space-y-2 text-gray-600 ml-7">
 
                                 <li class="space-y-1">
                                     <div class="flex items-start">
@@ -968,12 +984,12 @@
                                         <strong class="item-title text-gray-900">Statisch unbestimmte Systeme</strong>
                                     </div>
                                     <div class="item-description ml-7 text-gray-600">
-                                        innterliche- und äußere Unbestimmtheit, Integration mit Tabelle sowie Simpson, Reduktionssatz, Superpositionsprinzip
+                                        inntere- und äußere Unbestimmtheit, Integration mit Tabelle sowie Simpson, Reduktionssatz, Superpositionsprinzip
                                     </div>
                                 </li>
                                 <li class="space-y-1">
                                     <div class="flex items-start">
-                                        <strong class="item-title text-gray-900">Temperatur Lastfall</strong>
+                                        <strong class="item-title text-gray-900">Temperatur-Lastfall</strong>
                                     </div>
                                     <div class="item-description ml-7 text-gray-600">
                                         Krümmung, Dehnung, Zwangsspannungen
@@ -1002,7 +1018,7 @@
                                 </svg>
                                 Tragwerke
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
+                            <ul class="space-y-2 text-gray-600 ml-7">
 
                                 <li class="space-y-1">
                                     <div class="flex items-start">
@@ -1022,7 +1038,7 @@
                                 </li>
                                 <li class="space-y-1">
                                     <div class="flex items-start">
-                                        <strong class="item-title text-gray-900">Stahl und Holzbau</strong>
+                                        <strong class="item-title text-gray-900">Stahl- und Holzbau</strong>
                                     </div>
                                     <div class="item-description ml-7 text-gray-600">
                                         Spannungsnachweis, Knicknachweis, Verformungsnachweis
@@ -1072,7 +1088,7 @@
                                 </svg>
                                 Baumechanik 1
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
+                            <ul class="space-y-2 text-gray-600 ml-7">
                                 <li class="space-y-1">
                                     <div class="flex items-start">
                                         <strong class="item-title text-gray-900">Schwerpunktberechnung</strong>
@@ -1128,7 +1144,7 @@
                                 </svg>
                                 Baumechanik 2
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
+                            <ul class="space-y-2 text-gray-600 ml-7">
 
                                 <li class="space-y-1">
                                     <div class="flex items-start">
@@ -1151,7 +1167,7 @@
                                         <strong class="item-title text-gray-900">Verformungen</strong>
                                     </div>
                                     <div class="item-description ml-7 text-gray-600">
-                                       Verformungsansatz, Drehnung, Biegelinie, schiefe Biegung, Verdrehung, Randbedingungen, Übergangsbedingungen
+                                       Verformungsansatz, Dehnung, Biegelinie, schiefe Biegung, Verdrehung, Randbedingungen, Übergangsbedingungen
                                     </div>
                                 </li>
                                 <li class="space-y-1">
@@ -1177,7 +1193,7 @@
                                 </svg>
                                 Baustatik 1
                             </h4>
-                            <ul class="space-y-2 text-gray-600 ml-7 text-sm">
+                            <ul class="space-y-2 text-gray-600 ml-7">
 
                                 <li class="space-y-1">
                                     <div class="flex items-start">
@@ -1200,7 +1216,7 @@
                                         <strong class="item-title text-gray-900">Schnittgrößen</strong>
                                     </div>
                                     <div class="item-description ml-7 text-gray-600">
-                                       Schnittprinzip, PvV und PvK Verfahren, Polpläne, Superpositionsprinzip
+                                       Schnittprinzip, PvV- und PvK-Verfahren, Polpläne, Superpositionsprinzip
                                     </div>
                                 </li>
                                 <li class="space-y-1">
@@ -1213,7 +1229,7 @@
                                 </li>
                                 <li class="space-y-1">
                                     <div class="flex items-start">
-                                        <strong class="item-title text-gray-900">Temperatur Lastfall</strong>
+                                        <strong class="item-title text-gray-900">Temperatur-Lastfall</strong>
                                     </div>
                                     <div class="item-description ml-7 text-gray-600">
                                        Krümmung, Dehnung, Zwangsspannungen
@@ -1234,16 +1250,18 @@
     <!-- Pricing Section -->
     <section id="pricing" class="py-20" style="background-color: var(--secondary-color_trans)">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-display font-bold text-gray-900 mb-0">Preise</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-display font-bold text-gray-900 mb-1">Preise</h2>
                 <div class="section-divider"></div>
-                <p class="mt-3 text-sm text-gray-800">erste Probestunde ist GRATIS</p>
+                <p class="text-xl text-gray-900 mt-6">Transparente Preisgestaltung für jede Gruppengröße</p>
+                <p class="text-gray-800">erste Probestunde ist GRATIS</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 <div class="pricing-card">
                     <div class="text-center mb-8">
-                        <h3 class="text-xl font-display font-bold text-gray-900 mb-0">Statik &amp; Tragwerke</h3>
+                        <h3 class="text-2xl font-display font-bold text-gray-900 mb-2">Statik &amp; Tragwerke</h3>
+                        <p class="text-gray-600">Professionelle Unterstützung in allen Bereichen</p>
                     </div>
                     
                     <div class="space-y-4">
@@ -1281,7 +1299,8 @@
 
                 <div class="pricing-card">
                     <div class="text-center mb-8">
-                        <h3 class="text-xl font-display font-bold text-gray-900 mb-0">Baumechanik</h3>
+                        <h3 class="text-2xl font-display font-bold text-gray-900 mb-2">Baumechanik</h3>
+                        <p class="text-gray-600">Vertiefende Kenntnisse für Universität</p>
                     </div>
                     
                     <div class="space-y-4">
@@ -1323,12 +1342,13 @@
     <!-- Location Section -->
     <section id="location" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-display font-bold text-gray-900 mb-0">Standorte</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-display font-bold text-gray-900 mb-1">Standorte</h2>
                 <div class="section-divider"></div>
+                <p class="text-xl text-gray-900 mt-6">Flexible Unterrichtsorte in Graz und Online</p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-8 items-center">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8">
                     <div class="bg-gray-50 rounded-2xl p-6">
                         <div class="flex items-start">
@@ -1338,8 +1358,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2">HTBLVA Ortwein Graz</h3>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">HTBLVA Ortwein Graz</h3>
                                 <p class="text-gray-600 mb-2">Körösistraße 157, 8010 Graz</p>
+                                <p class="text-sm text-gray-400">Direkt vor Ort für HTL-Schüler</p>
                             </div>
                         </div>
                     </div>
@@ -1352,8 +1373,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Technische Universität Graz</h3>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Technische Universität Graz</h3>
                                 <p class="text-gray-600 mb-2">Rechbauerstraße 12, 8010 Graz</p>
+                                <p class="text-sm text-gray-400">Ideal für Universitätsstudenten</p>
                             </div>
                         </div>
                     </div>
@@ -1367,163 +1389,171 @@
                             </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-gray-500 mb-2">Online-Unterricht</h3>
-                                <p class="text-gray-400">Über Discord</p>
+                                <p class="text-gray-400 mb-2">Über Discord</p>
+                                <p class="text-sm text-gray-400">Flexibel von überall</p>
                             </div>
                         </div>
+                        <p class="text text-gray-500 mt-6">Unterricht in Präsenz wird bevorzugt</p>
                     </div>
-                    <p class="text text-gray-500 text-center">Unterricht in Präsenz wird bevorzugt</p>
+                </div>
+
+                <div class="bg-gray-100 rounded-2xl h-96 flex items-center justify-center">
+                    <div id="map" style="width: 100%; height: 100%; border-radius: 10px; overflow: hidden; z-index: 0;">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-<section id="about" class="py-12 sm:py-20" style="background-color: var(--secondary-color_trans);">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-8 sm:mb-16">
-            <h2 class="text-3xl font-display font-bold text-gray-900 mb-1">Über mich</h2>
-            <div class="section-divider"></div>
-        </div>
+    <section id="about" class="py-20" style="background-color: var(--secondary-color_trans);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-display font-bold text-gray-900 mb-1">Über mich</h2>
+                <div class="section-divider"></div>
+                <p class="text-xl text-gray-900 mt-6">Ihr Experte für Statik und Baumechanik</p>
+            </div>
 
-        <div class="grid lg:grid-cols-1 gap-8 items-start">
-            <div class="order-1">
-                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
+            <div class="grid lg:grid-cols-1 gap-12 items-start"> 
+                <div class="order-1">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg">
+                        
+                        <div class="flex flex-col sm:flex-row gap-8 mb-8 items-start"> 
+                            
+                            <div class="sm:w-1/3 flex-shrink-0 sm:max-w-sm sm:mr-8"> 
+                                <img src="bg_pictures/Me.png" 
+                                    width="400" 
+                                    height="500" 
+                                    class="rounded-2xl object-cover w-full h-auto max-h-96 mx-auto sm:mx-0 shadow-md">
+                            </div>
 
-                    <div class="flex flex-col gap-6 sm:gap-8 mb-8 items-start">
-
-                        <div class="sm:w-1/3 flex-shrink-0 sm:max-w-sm sm:mr-8">
-                            <img src="bg_pictures/Me.png"
-                                width="400"
-                                height="500"
-                                class="rounded-2xl object-cover w-full h-auto max-h-96 mx-auto shadow-md">
-                        </div>
-
-                        <div class="flex-grow order-2 sm:order-none mt-6">
+                            <div class="flex-grow">
                                 <h3 class="text-2xl font-display font-bold mb-4"
                                     style="color: var(--marked-text);">Ihr Nachhilfelehrer für Statik, Tragwerken und Baumechanik</h3>
-
-                            <div class="space-y-4 text-base text-sm" style="text-align: justify; color: var(--text-about-me);">
+                                
+                                <div class="space-y-4 text-base" style="text-align: justify; color: var(--text-about-me);">
                                 <p>
-                                    <em>Hallo!</em> Mein Name ist Rene Perchthaler,
-                                    und ich biete Nachhilfe in den Kernbereichen <strong>Statik</strong>,
-                                    <strong>Tragwerke</strong> und <strong>Baumechanik</strong> an.
-                                    Mein Ziel ist es, dir nicht nur zu helfen die aktuellen Prüfungen zu bestehen,
+                                    <em>Hallo!</em> Mein Name ist Rene Perchthaler, 
+                                    und ich biete Nachhilfe in den Kernbereichen <strong>Statik</strong>, 
+                                    <strong>Tragwerke</strong> und <strong>Baumechanik</strong> an. 
+                                    Mein Ziel ist es, dir nicht nur zu helfen die aktuellen Prüfungen zu bestehen, 
                                     sondern ein <strong>fundiertes und nachhaltiges Verständnis</strong> für das Thema zu entwickeln.
                                 </p>
                                 <hr>
-                                <div class="text-lg sm:text-xl text-gray-900">
+                                <div class="text-xl text-gray-900">
                                     <h3>Mein Hintergrund</h3>
                                 </div>
-
+                                
                                 <p>
-                                    Mein Weg in die Welt des Bauingenieurwesens begann an der <strong>HTBLVA Ortwein</strong>,
-                                    wo ich 2024 erfolgreich die Matura abgelegt habe.
-                                    Bereits während meiner Zeit dort habe ich meine Leidenschaft für die Materie entdeckt und mein Wissen aktiv geteilt:
+                                    Mein Weg in die Welt des Bauingenieurwesens begann an der <strong>HTBLVA Ortwein</strong>, 
+                                    wo ich 2024 erfolgreich die Matura abgelegt habe. 
+                                    Bereits während meiner Zeit dort habe ich meine Leidenschaft für die Materie entdeckt und mein Wissen aktiv geteilt: 
                                     Ich habe meinen Mitschülern in Statik <strong>intensiv geholfen und bis zur Matura</strong> begleitet.
                                     Aktuell vertiefe ich mein Fachwissen im <strong>Bauingenieurwesen-Studium</strong> an der <strong>Technischen Universität Graz</strong>.
                                 </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="flex flex-col gap-6 sm:gap-8 mb-4 items-start">
+                        <div class="flex flex-col sm:flex-row gap-8 mb-8 items-start">
+    
                         <div class="flex-grow">
-                            <div class="space-y-4 text-base text-sm" style="text-align: justify; color: var(--text-about-me);">
-
+                            <div class="space-y-4 text-base" style="text-align: justify; color: var(--text-about-me);">
+                                
                                 <hr class="mb-6" style="border-top-color: #ddd;">
-
-                                <h3 class="text-lg sm:text-xl mb-4 text-gray-900" style="text-align: left;">
+                                
+                                <h3 class="text-xl mb-4 text-gray-900">
                                     Mein Ansatz: Erfolgreich und Motivierend
                                 </h3>
-
+                                
                                 <p>
-                                    Ich bin davon überzeugt, dass der Schlüssel zum Erfolg in der
+                                    Ich bin davon überzeugt, dass der Schlüssel zum Erfolg in der 
                                     <strong>Visualisierung und dem schrittweisen Aufbau</strong> des Verständnisses liegt.
                                 </p>
 
                                 <div class="space-y-4 pt-2">
-
-                                    <div class="block">
-                                        <span class="font-bold block mb-1 sm:inline sm:mr-2" style="color: var(--marked-text);">
+                                    
+                                    <div class="flex">
+                                        <span class="font-bold flex-shrink-0 mr-2" style="color: var(--marked-text);">
                                             Fundierte Grundlagen:
-                                        </span>
+                                        </span> 
                                         <span class="text-justify" style="color: var(--text-about-me);">
-                                            Wir erarbeiten gemeinsam die notwendigen <strong>Grundprinzipien</strong> und
+                                            Wir erarbeiten gemeinsam die notwendigen <strong>Grundprinzipien</strong> und 
                                             <strong>Rechenmethoden</strong>, um auch komplexe Aufgabenstellungen souverän lösen zu können.
                                         </span>
-                                    </div>
-
-                                    <div class="block">
-                                        <span class="font-bold block mb-1 sm:inline sm:mr-2" style="color: var(--marked-text);">
+                                    </div> 
+                                    
+                                    <div class="flex">
+                                        <span class="font-bold flex-shrink-0 mr-2" style="color: var(--marked-text);">
                                             Prüfungsvorbereitung:
                                         </span>
                                         <span class="text-justify" style="color: var(--text-about-me);">
-                                            Ich kenne die Anforderungen aus der <strong>HTL</strong> und dem <strong>TU-Umfeld</strong> und bereite
+                                            Ich kenne die Anforderungen aus der <strong>HTL</strong> und dem <strong>TU-Umfeld</strong> und bereite 
                                             dich gezielt auf Schularbeiten, Tests, Klausuren und die Matura vor.
                                         </span>
                                     </div>
-
-                                    <div class="block">
-                                        <span class="font-bold block mb-1 sm:inline sm:mr-2" style="color: var(--marked-text);">
+                                    
+                                    <div class="flex">
+                                        <span class="font-bold flex-shrink-0 mr-2" style="color: var(--marked-text);">
                                             Individuelle Betreuung:
                                         </span>
                                         <span class="text-justify" style="color: var(--text-about-me);">
-                                            Der Fokus liegt auf deinen <strong>individuellen Schwierigkeiten</strong> und deinem
+                                            Der Fokus liegt auf deinen <strong>individuellen Schwierigkeiten</strong> und deinem 
                                             <strong>Lerntempo</strong>.
                                         </span>
                                     </div>
-
-                                    <div class="block">
-                                        <span class="font-bold block mb-1 sm:inline sm:mr-2" style="color: var(--marked-text);">
+                                    
+                                    <div class="flex">
+                                        <span class="font-bold flex-shrink-0 mr-2" style="color: var(--marked-text);">
                                             Motivation:
                                         </span>
                                         <span class="text-justify" style="color: var(--text-about-me);">
-                                            Mich motiviert es, <strong>anderen zu helfen</strong> und diesen Moment zu sehen,
+                                            Mich motiviert es, <strong>anderen zu helfen</strong> und diesen Moment zu sehen, 
                                             wenn es bei einem Schüler "Klick" macht.
                                         </span>
                                     </div>
-
+                                    
                                 </div>
                                 <p class="pt-4">
-                                    Wenn du Unterstützung suchst, um Beispiele dieser Art nicht nur zu berechnen, sondern auch zu
+                                    Wenn du Unterstützung suchst, um Beispiele dieser Art nicht nur zu berechnen, sondern auch zu 
                                     <strong>verstehen</strong>, freue ich mich auf deine Nachricht!
                                 </p>
                             </div>
                         </div>
                     </div>
-
-                    <hr class="my-6 mb-4">
-
-                    <div class="mt-4 sm:mt-8 grid grid-cols-2 gap-4">
-                        <div class="text-center">
-                            <div class="text-1xl sm:text-2xl font-bold"
-                                style="color: var(--marked-text);">15+</div>
-                            <div class="text-xs sm:text-sm text-gray-500">Schülern geholfen</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-1xl sm:text-2xl font-bold"
-                                style="color: var(--marked-text);">Erfolgreicher Abschluss</div>
-                            <div class="text-xs sm:text-sm text-gray-500">1er Matura in Statik</div>
+                        
+                        <hr class="my-6">
+                        
+                        <div class="mt-8 grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold"
+                                    style="color: var(--marked-text);">15+</div>
+                                <div class="text-sm text-gray-500">Schülern geholfen</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold"
+                                    style="color: var(--marked-text);">Erfolgreicher Abschluss</div>
+                                <div class="text-sm text-gray-500">1er Matura in Statik</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-display font-bold text-gray-900 mb-1">Kontakt</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-display font-bold text-gray-900 mb-1">Kontakt</h2>
                 <div class="section-divider"></div>
+                <p class="text-xl text-gray-700 mt-6">Jetzt unverbindlich anfragen</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Contact Form -->
                 <div class="bg-gray-50 rounded-2xl p-8">
-                    <h3 class="text-lg font-display font-bold text-gray-900 mb-6">Kontaktformular</h3>
+                    <h3 class="text-2xl font-display font-bold text-gray-900 mb-6">Kontaktformular</h3>
                     
                     <form action="https://formspree.io/f/mblblnjr" method="POST" class="space-y-6">
                         <script>
@@ -1644,6 +1674,23 @@
                             <p class="mt-3">8075 Hart bei Graz</p>
                         </div>
                     </div>
+
+                    <div class="rounded-2xl p-8 border-2"
+                        style="border-color: var(--border-light);background-color: var(--green-background);">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-lg text-white mr-4"
+                                style="background-color: var(--border-light);">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold"
+                                    style="color: var(--color-schnelle-antwort);">Schnelle Antwort</h4>
+                                <p class="text-sm text-gray-600">Antwort innerhalb von 24 Stunden</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1651,10 +1698,10 @@
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h3 class="text-2xl font-display font-bold text-gradient mb-4">STAB</h3>
-                <p class="text-sm text-gray-400 mb-3">Professionelle Nachhilfe in Statik, Tragwerken und Baumechanik</p>
+                <p class="text-gray-400 mb-6">Professionelle Nachhilfe in Statik, Tragwerken und Baumechanik</p>
                 <div class="border-t border-gray-800 pt-6">
                     <p class="text-gray-500 text-sm">
                         © 2025 Nachhilfe STAB. Alle Rechte vorbehalten.
@@ -1740,8 +1787,21 @@
                 nav.classList.remove('shadow-lg');
             }
         });
+    </script>
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-               // Mobile menu functionality
+    <script>
+        var map = L.map('map').setView([47.081, 15.435], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        L.marker([47.069560, 15.450518]).addTo(map).bindPopup("TU Graz");
+        L.marker([47.091662, 15.423002]).addTo(map).bindPopup("HTBLVA Ortwein");
+
+        // Mobile menu functionality
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
         const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
@@ -1811,7 +1871,7 @@
             
             const NUM_GRID_POSITIONS = 18; 
             
-            const EMPTY_POSITION_INDEX = [0,1];
+            const EMPTY_POSITION_INDEX = 1;
 
             let selectedLightImages = [];
             let selectedDarkImages = [];
@@ -1843,7 +1903,7 @@
 
                 for (let i = 0; i < NUM_GRID_POSITIONS; i++) {
                     
-                    if (i === EMPTY_POSITION_INDEX[i]) {
+                    if (i === EMPTY_POSITION_INDEX) {
                         selectedLightImages.push(EMPTY_IMAGE_PATH);
                         selectedDarkImages.push(EMPTY_IMAGE_PATH);
                         continue;
@@ -1949,5 +2009,16 @@
                 button.textContent = '+mehr';
             }
         }
-    </script>  
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+    
     </body></html>
